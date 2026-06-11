@@ -11,7 +11,7 @@ public class TelaInicial extends JPanel{
 
 	private static final long serialVersionUID = -1970210562945307331L;
 
-	public TelaInicial(CardLayout cards, JPanel painelPrincipal, JPanel telaExibirObrasAtivas, JPanel telaRankingObras) {
+	public TelaInicial(CardLayout cards, JPanel painelPrincipal, JPanel telaExibirObrasAtivas, JPanel telaRankingObras, JPanel telaCriarExpo, JPanel telaAdicionarObraExpo) {
 		
 		setLayout(new GridBagLayout());
 		
@@ -56,12 +56,17 @@ public class TelaInicial extends JPanel{
 		});
 		
 		botaoBuscarExposicao.addActionListener(e -> {
+			cards.show(painelPrincipal, "BUSCAR_EXPO");
 		});
 		
 		botaoCriarExposicao.addActionListener(e -> {
+			((TelaCriarExposicao) telaCriarExpo).atualizarLista();
+			cards.show(painelPrincipal, "CRIAR_EXPO");
 		});
 		
 		botaoAdicionarObraExpo.addActionListener(e -> {
+			((TelaAdicionarObraExposicao) telaAdicionarObraExpo).atualizarLista();
+			cards.show(painelPrincipal, "ADD_OBRA_EXPO");
 		});
 		
 		labelTitulo.setFont(labelTitulo.getFont().deriveFont(Font.BOLD, 20f));

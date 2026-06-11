@@ -24,6 +24,10 @@ public class JanelaPrincipal extends JFrame {
 	private JPanel telaBuscarPorAutor;
 	private JPanel telaListarObrasAutor;
 	private JPanel telaRankingObras;
+	private JPanel telaBuscarExpo;
+	private JPanel telaExibirObrasExpo;
+	private JPanel telaCriarExpo;
+	private JPanel telaAdicionarObraExpo;
 	
 	public JanelaPrincipal(String titulo, IArtGallery minhaGaleria) {
 		super(titulo);
@@ -41,8 +45,12 @@ public class JanelaPrincipal extends JFrame {
 		telaListarObrasAutor = new TelaListarObrasAutor(cards, painelPrincipal, this.minhaGaleria);
 		telaBuscarPorAutor = new TelaBuscarPorAutor(cards, painelPrincipal, telaListarObrasAutor);
 		telaRankingObras = new TelaRankingObras(cards, painelPrincipal, this.minhaGaleria);
+		telaExibirObrasExpo = new TelaExibirObrasExposicao(cards, painelPrincipal, this.minhaGaleria);
+		telaBuscarExpo = new TelaBuscarExposicao(cards, painelPrincipal, telaExibirObrasExpo);
+		telaCriarExpo = new TelaCriarExposicao(cards, painelPrincipal, this.minhaGaleria);
+		telaAdicionarObraExpo = new TelaAdicionarObraExposicao(cards, painelPrincipal, this.minhaGaleria);
 		
-		telaInicial = new TelaInicial(cards, painelPrincipal, telaExibirObrasAtivas, telaRankingObras);
+		telaInicial = new TelaInicial(cards, painelPrincipal, telaExibirObrasAtivas, telaRankingObras, telaCriarExpo, telaAdicionarObraExpo);
         
 		painelPrincipal.add(telaInicial, "INICIO");
         painelPrincipal.add(telaPublicarMenu, "MENU_PUBLICAR");
@@ -55,6 +63,10 @@ public class JanelaPrincipal extends JFrame {
         painelPrincipal.add(telaBuscarPorAutor, "BUSCAR_AUTOR");
         painelPrincipal.add(telaListarObrasAutor, "LISTAR_AUTOR");
         painelPrincipal.add(telaRankingObras, "RANKING");
+        painelPrincipal.add(telaBuscarExpo, "BUSCAR_EXPO");
+        painelPrincipal.add(telaExibirObrasExpo, "LISTAR_EXPO");
+        painelPrincipal.add(telaCriarExpo, "CRIAR_EXPO");
+        painelPrincipal.add(telaAdicionarObraExpo, "ADD_OBRA_EXPO");
         
         add(painelPrincipal);
         pack();

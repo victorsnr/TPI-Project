@@ -1,35 +1,33 @@
 package ui;
 
+import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.CardLayout;
 
 import javax.swing.*;
 
-public class TelaBuscarPorAutor extends JPanel {
-
-	private static final long serialVersionUID = 6408546676571617947L;
-
-	public TelaBuscarPorAutor (CardLayout cards, JPanel painelPrincipal, JPanel telaListarObrasAutor) {	
+public class TelaBuscarExposicao extends JPanel{
+	
+	public TelaBuscarExposicao(CardLayout cards, JPanel painelPrincipal, JPanel telaExibirObrasExpo) {
 		setLayout(new GridBagLayout());
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
-		JLabel labelTitulo = new JLabel("Buscar Obras de um Autor");
+		JLabel labelTitulo = new JLabel("Buscar Exposição");
 		
-		JLabel labelNomeAutor = new JLabel("Nome do Autor");
+		JLabel labelNomeAutor = new JLabel("Nome da Exposição");
 		JTextField textFieldNomeAutor = new JTextField(20);
 		
 		JButton botaoConfirmar = new JButton("Confirmar");
 		JButton botaoVoltar = new JButton("Voltar");
 		
 		botaoConfirmar.addActionListener(e -> {
-			String autor = textFieldNomeAutor.getText();
-			if (!autor.isBlank()) {
-				((TelaListarObrasAutor) telaListarObrasAutor).atualizarListaAutor(autor);
-				cards.show(painelPrincipal, "LISTAR_AUTOR");
+			String exposicao = textFieldNomeAutor.getText();
+			if (!exposicao.isBlank()) {
+				((TelaExibirObrasExposicao) telaExibirObrasExpo).atualizarListaExposicao(exposicao);
+				cards.show(painelPrincipal, "LISTAR_EXPO");
 			} else {
 				JOptionPane.showMessageDialog(this, "Erro! Campo vazio!", "Erro", JOptionPane.ERROR_MESSAGE);
 			}

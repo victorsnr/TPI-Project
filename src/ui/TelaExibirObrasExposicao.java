@@ -13,22 +13,26 @@ import models.Obra;
 
 import java.util.Vector;
 
-public class TelaListarObrasAutor extends JPanel{
+import exceptions.ExposicaoNaoEncontradaException;
 
+public class TelaExibirObrasExposicao extends JPanel{
+	
 	private static final long serialVersionUID = 3194870437005052897L;
 	private IArtGallery minhaGaleria;
 	private DefaultListModel<Obra> listModelObras;
+	private CardLayout cards;
+	private JPanel painelPrincipal;
 	
-	public TelaListarObrasAutor (CardLayout cards, JPanel painelPrincipal, IArtGallery minhaGaleria) {
-		
+	public TelaExibirObrasExposicao (CardLayout cards, JPanel painelPrincipal, IArtGallery minhaGaleria) {
 		this.minhaGaleria = minhaGaleria;
-
+		this.cards = cards;
+		this.painelPrincipal = painelPrincipal;
 		
 		setLayout(new GridBagLayout());
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
-		JLabel labelTitulo = new JLabel("Obras Encontradas");
+		JLabel labelTitulo = new JLabel("Obras Expostas");
 		
 		this.listModelObras = new DefaultListModel<>();
 		
@@ -49,7 +53,7 @@ public class TelaListarObrasAutor extends JPanel{
 
 		botaoVoltar.addActionListener(e -> {
 			textAreaDetalhesObra.setText("");
-			cards.show(painelPrincipal, "INICIO");
+			this.cards.show(this.painelPrincipal, "INICIO");
 		});
 		
 		textAreaDetalhesObra.setEditable(false);
@@ -88,17 +92,18 @@ public class TelaListarObrasAutor extends JPanel{
 		add(botaoVoltar, gbc);
 	}
 	
-	public void atualizarListaAutor(String autor) {
+	public void atualizarListaExposicao(String nomeExposicao) {
 		listModelObras.clear();
 		
-		Vector<Obra> obrasAutor = minhaGaleria.buscarPorAutor(autor);
-		
-		if (obrasAutor.isEmpty()) {
-			JOptionPane.showInternalMessageDialog(this, "O autor não possui obras cadastradas!", "ArtGallery diz:", JOptionPane.INFORMATION_MESSAGE);
-		} else {
-			for (Obra obra : obrasAutor) {
+		Vector<Obra> obrasExpostas; 
+		try {
+			obrasExpostas = minhaGaleria.obrasExpostas(nomeExposicao);
+			for (Obra obra : obrasExpostas) {
 				listModelObras.addElement(obra);
 			}
+		} catch (ExposicaoNaoEncontradaException erro) {
+			JOptionPane.showMessageDialog(this, "Exposição não encontrada!", "ArtGallery diz:", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 	}
 }
