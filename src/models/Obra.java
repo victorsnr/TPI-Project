@@ -30,6 +30,10 @@ public abstract class Obra {
 		return this.autor;
 	}
 	
+	public Vector<Avaliacao> getAvaliacoes(){
+		return avaliacoes;
+	}
+	
 	public boolean isAtiva() {
 		return this.ativa;
 	}

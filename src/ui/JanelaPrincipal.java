@@ -3,7 +3,10 @@ package ui;
 import javax.swing.*;
 import interfaces.IArtGallery;
 import java.awt.CardLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+import database.DatabaseConstructor;
 
 public class JanelaPrincipal extends JFrame {
 
@@ -29,7 +32,7 @@ public class JanelaPrincipal extends JFrame {
 	private JPanel telaCriarExpo;
 	private JPanel telaAdicionarObraExpo;
 	
-	public JanelaPrincipal(String titulo, IArtGallery minhaGaleria) {
+	public JanelaPrincipal(String titulo, IArtGallery minhaGaleria, DatabaseConstructor database) {
 		super(titulo);
 		this.cards = new CardLayout();
 		this.painelPrincipal = new JPanel(cards);
@@ -68,11 +71,22 @@ public class JanelaPrincipal extends JFrame {
         painelPrincipal.add(telaCriarExpo, "CRIAR_EXPO");
         painelPrincipal.add(telaAdicionarObraExpo, "ADD_OBRA_EXPO");
         
+        addWindowListener(new WindowAdapter() {
+        	@Override
+        	public void windowClosing(WindowEvent e) {
+        		database.writeData();
+        		database.endConnection();
+        		dispose();
+        		System.exit(0);
+        	}
+        });
+        
         add(painelPrincipal);
         pack();
         setSize(800, 700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+        
     }
 }

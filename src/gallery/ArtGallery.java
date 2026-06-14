@@ -52,6 +52,13 @@ public class ArtGallery implements IArtGallery {
 		Obra obraEncontrada = this.repositorio.buscar(titulo, autor);
 		
 		if (obraEncontrada != null) {
+			Vector<Avaliacao> avaliacoesObra = obraEncontrada.getAvaliacoes();
+			for (Avaliacao a : avaliacoesObra) {
+				if (a.getUsuario().equals(avaliacao.getUsuario())) {
+					avaliacoesObra.remove(a);
+					break;
+				}
+			}
 			obraEncontrada.adicionarAvaliacao(avaliacao);
 			message = "Obra avaliada com sucesso!";
 		} else {
@@ -134,7 +141,8 @@ public class ArtGallery implements IArtGallery {
 			throw new ExposicaoNaoEncontradaException();
 		}
 	}
-
+	
+	@Override
 	public void adicionarExposicao(Exposicao exposicao) throws ExposicaoExistenteException {
 		String nomeExpo = exposicao.getNome();
 		
@@ -147,6 +155,7 @@ public class ArtGallery implements IArtGallery {
 		exposicoes.add(exposicao);
 	}
 	
+	@Override
 	public void adicionarObraNaExposicao(String nomeExpo, Obra obra) throws ExposicaoNaoEncontradaException, ObraJaCadastradaException{
 		nomeExpo = nomeExpo.trim().toUpperCase();
 		Exposicao expoEncontrada = null;
@@ -169,5 +178,20 @@ public class ArtGallery implements IArtGallery {
 		}
 		
 		expoEncontrada.adicionarObra(obra);
+	}
+	
+	@Override
+	public Vector<Obra> getRepositorio(){
+		return repositorio.listar();
+	}
+	
+	@Override
+	public Vector<Exposicao> getExposicoes(){
+		return exposicoes;
+	}
+	
+	@Override
+	public IRepositorioObra getRepoOfc () {
+		return this.repositorio;
 	}
 }

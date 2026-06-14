@@ -17,4 +17,7 @@ public interface IArtGallery {
 	Vector<Obra> obrasExpostas (String nomeExposicao) throws ExposicaoNaoEncontradaException;
 	void adicionarExposicao(Exposicao exposicao) throws ExposicaoExistenteException;
 	void adicionarObraNaExposicao(String nomeExpo, Obra obra) throws ExposicaoNaoEncontradaException, ObraJaCadastradaException;
+	Vector<Obra> getRepositorio();
+	Vector<Exposicao> getExposicoes();
+	IRepositorioObra getRepoOfc();
 }

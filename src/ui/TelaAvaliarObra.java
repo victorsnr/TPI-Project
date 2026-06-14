@@ -16,12 +16,17 @@ import models.Avaliacao;
 
 public class TelaAvaliarObra extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8106808545560657185L;
+
 	public TelaAvaliarObra (CardLayout cards, JPanel painelPrincipal, IArtGallery minhaGaleria) {
 		setLayout(new GridBagLayout());
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
-		JLabel labelTitulo = new JLabel("Remover Obra");
+		JLabel labelTitulo = new JLabel("Avaliar obra");
 		
 		JLabel labelTituloObra = new JLabel("Título da Obra:");
 		JTextField textFieldTituloObra = new JTextField(20);
@@ -38,6 +43,9 @@ public class TelaAvaliarObra extends JPanel {
 		
 		JLabel labelComentario = new JLabel("Comentario");
 		JTextArea textAreaComentario = new JTextArea(5, 20);
+		
+		textAreaComentario.setLineWrap(true);
+		textAreaComentario.setWrapStyleWord(true);
 		
 		JButton botaoConfirmar = new JButton("Confirmar");
 		JButton botaoVoltar = new JButton("Voltar");
@@ -65,6 +73,8 @@ public class TelaAvaliarObra extends JPanel {
 				JOptionPane.showMessageDialog(this, message, "ArtGallery diz:", JOptionPane.INFORMATION_MESSAGE);
 				textFieldTituloObra.setText("");
 				textFieldNomeAutor.setText("");
+				spinnerNota.setValue(0);
+				textAreaComentario.setText("");
 				cards.show(painelPrincipal, "INICIO");
 			} else {
 				JOptionPane.showMessageDialog(this, message, "Erro", JOptionPane.ERROR_MESSAGE);

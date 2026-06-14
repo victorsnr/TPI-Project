@@ -72,7 +72,7 @@ public class TelaPublicarPinturaDigital extends JPanel {
 		});
 		
 		botaoVoltar.addActionListener(e -> {
-			cards.show(painelPrincipal, "INICIO");
+			cards.show(painelPrincipal, "MENU_PUBLICAR");
 		});
 		
 		JPanel painelBotoes = new JPanel();

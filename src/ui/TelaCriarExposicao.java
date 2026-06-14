@@ -57,7 +57,7 @@ public class TelaCriarExposicao extends JPanel{
 		
 		botaoConfirmar.addActionListener(e -> {
 			String nomeExpo = textFieldNomeExpo.getText();
-			if (!nomeExpo.isBlank()) {
+			if (!nomeExpo.isBlank() && !listObras.isSelectionEmpty() && !listModelObras.isEmpty()) {
 				Exposicao newExpo = new Exposicao(nomeExpo);
 				Vector<Obra> obrasSelecionadas = new Vector<>(listObras.getSelectedValuesList());
 				
@@ -76,7 +76,7 @@ public class TelaCriarExposicao extends JPanel{
 					JOptionPane.showMessageDialog(this, erro.getMessage(), "ArtGallery diz:", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				JOptionPane.showMessageDialog(this, "Erro! Campos em branco", "ArtGallery diz:", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Erro! Campos em branco ou obras não selecionadas", "ArtGallery diz:", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		

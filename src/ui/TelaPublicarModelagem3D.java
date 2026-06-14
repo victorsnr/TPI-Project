@@ -86,7 +86,7 @@ public TelaPublicarModelagem3D (CardLayout cards, JPanel painelPrincipal, IArtGa
 		});
 		
 		botaoVoltar.addActionListener(e -> {
-			cards.show(painelPrincipal, "INICIO");
+			cards.show(painelPrincipal, "MENU_PUBLICAR");
 		});
 		
 		JPanel painelBotoes = new JPanel();

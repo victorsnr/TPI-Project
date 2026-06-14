@@ -11,7 +11,8 @@ public class RepositorioObraVector implements IRepositorioObra {
 	public RepositorioObraVector() {
 		this.repositorio = new Vector<>();
 	}
-
+	
+	@Override
 	public void cadastrar(Obra obra) throws ObraJaCadastradaException {
 		String titulo = obra.getTitulo();
 		String autor = obra.getAutor();
@@ -24,6 +25,7 @@ public class RepositorioObraVector implements IRepositorioObra {
 		repositorio.add(obra);
 	}
 	
+	@Override
 	public Obra buscar(String titulo, String autor){
 		titulo = titulo.trim().toUpperCase();
 		autor = autor.trim().toUpperCase();
@@ -37,6 +39,7 @@ public class RepositorioObraVector implements IRepositorioObra {
 		return null;
 	}
 	
+	@Override
 	public void atualizar(Obra obra) throws ObraNaoEncontradaException, TiposIncompativeisException {
 		String titulo = obra.getTitulo();
 		String autor = obra.getAutor();
@@ -54,6 +57,7 @@ public class RepositorioObraVector implements IRepositorioObra {
 		repositorio.set(indice, obra);;
 	}
 	
+	@Override
 	public void remover(String titulo, String autor) throws ObraNaoEncontradaException {
 		titulo = titulo.trim().toUpperCase();
 		autor = autor.trim().toUpperCase();
@@ -66,7 +70,8 @@ public class RepositorioObraVector implements IRepositorioObra {
 		obraEncontrada.setAtiva(false);
 	}
 	
+	@Override
 	public Vector<Obra> listar(){
-		return new Vector<>(repositorio);
+		return repositorio;
 	}
 }
